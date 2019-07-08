@@ -1,0 +1,300 @@
+私蜜_name
+Contract_keyword
+Start Activity via Package name
+zdkey_keyword
+nmyxp_keyword
+Send HttpURLConnection request
+reboot_cmd
+桃色_name
+欲涩_name
+Update SMS status
+MiGu Pay
+Lcom.startapp_pkg_name
+Lcom.madhouse_pkg_name
+Get Location
+色戒_name
+Use TCP
+URL_api
+影院_name
+Telephony.SMS-RECEIVED_keyword
+MailFrom_Passa_keyword
+jjyy_keyword
+狼友_name
+Lcom/elev/MyService_keyword
+crypto_A
+正确格式 手机号码#内容_keyword
+tel:_keyword
+getInputStream_api
+短信_keyword
+pdus_keyword
+Set UI Visibility
+收费_keyword
+divideMessage_api
+gcc_keyword
+情涩_name
+Llengmo.lockphone_pkg_name
+火辣_name
+android.package-archive_keyword
+Lcom.google.ads_pkg_name
+sex_name
+LogCatBroadcaster_keyword
+Видеоматериалов_keyword
+.onion_keyword
+解除_keyword
+content://sms_keyword
+openFileOutput_api
+porn_name
+写真_name
+Lcom.adchina_pkg_name
+支付_keyword
+Lcom.waps_pkg_name
+ln_cmd
+aide_pkg_name
+Use Dynamic Load
+福利_name
+FLAG_ACTIVITY_NEW_TASK_keyword
+Lcom.domob_pkg_name
+setComponentEnabledSetting_api
+qvod_name
+欲望_name
+alpay_keyword
+发送失败_keyword
+Java Exec Shell cmds
+LogCatBroadcaster_pkg_name
+insmod_cmd
+device_policy_keyword
+chmod_cmd
+Payment_keyword
+getFromLocation_api
+alertWindow
+В течении 24 часов_keyword
+破解器_name
+cat_cmd
+abortBroadcast_api
+FLAG_FULLSCREEN
+getDefaultSmsPackage_api
+拦截消息_keyword
+元_keyword
+pay_keyword
+识别码_keyword
+Lcom.inmobi_pkg_name
+pm_cmd
+激情_name
+Lcom/elev/XRece_keyword
+小视频_name
+заблокирован_keyword
+淫欲_name
+岛国_name
+密码_keyword
+Llengmo.lockphone.lock_keyword
+Get SIM Information
+xxoo_name
+QQ会员_name
+开始群发_keyword
+Lcom.adfonic_pkg_name
+ADRTLogCatReader
+FullScreen
+pnumber_keyword
+Lcom.skymobi_pkg_name
+Lcom.baidu.mobads_pkg_name
+Use Proxy
+разблокируем_keyword
+调教_name
+nmpp_keyword
+Lcom.adsmogo_pkg_name
+moneXy_keyword
+Send SMS
+Педофилия_keyword
+nmmp_keyword
+宅男_name
+丝袜_name
+SOME_keyword
+涩爱_name
+content://sms/sent_keyword
+Get MCC and MNC
+getLastKnownLocation_api
+chown_cmd
+Deny Button
+разблокировки_keyword
+序列_keyword
+锁_keyword
+锁屏_name
+刷钻_name
+content://sms/inbox_keyword
+Get Apps installed
+Lcom.facebook.ads_pkg_name
+getprop_cmd
+对发_keyword
+到期时间_keyword
+hosts_cmd
+Use Reflect
+rm _cmd
+色色_name
+随机码_keyword
+aide_keyword
+$_keyword
+номер_keyword
+запрещенных_keyword
+PornDroid_keyword
+Lcom.guohead_pkg_name
+crypto_B
+裸露_name
+getString
+setSystemWindow
+killProcess_cmd
+Hide the Icon
+restorecon_cmd
+Configuration File Operations
+mount -o remount,rw _cmd
+Lcom.iappay_pkg_name
+Get Originating address (Sender) of SMS Message
+getProcessMemoryInfo
+凌辱_name
+成人_name
+ls_cmd
+卡钻_name
+无码_name
+NEW_OUTGOING_CALL_keyword
+Lcom.youmi_pkg_name
+getDeviceID_api
+Lcom.e4a_pkg_name
+Set app start repeatly
+Cancel Alarm
+爽片_name
+openConnection_api
+getInstalledApplications_api
+Lcom.cmnpay_pkg_name
+Lcom.h_pkg_name
+content://sms/draft_keyword
+pm install -r_cmd
+lock_pkg_name
+nmop_keyword
+ADRTLogCatReader_pkg_name
+外挂_name
+刷人气_name
+监视_keyword
+MailFrom_name_keyword
+Read IMEI
+am_cmd
+情欲_name
+神器_name
+android.intent.action.RUN_keyword
+mount_cmd
+情趣_name
+WeChat Pay
+Device Admin Permission
+费_keyword
+色影_name
+Delete SMS
+rm -r _cmd
+Set default SMS app
+setRingerMode
+秒赞_name
+Get Build Version
+看片_name
+diao_keyword
+波霸_name
+ContinueWindow
+Lcom.adwhirl_pkg_name
+裸聊_name
+Аппарата_keyword
+撸撸_name
+Lock Mixed Feature 3
+Get Message Body
+lock_keyword
+美女_name
+HttpURLConnection_api
+Kill Process
+￥_keyword
+mygirl_keyword
+Does Cipher
+Get User Phone Number
+pm uninstall -k _cmd
+nmhup_keyword
+刷赞_name
+Use Thread
+content://telephony/carriers/preferapn_keyword
+ps_cmd
+getOutputStream_api
+av_name
+installPackage_api
+Get Resources
+Lock Mixed Feature 1
+chmod -R 777 _cmd
+Оплатить_keyword
+Lcom.admob_pkg_name
+脱衣服_name
+Ваш телефон_keyword
+Lcom.qq.e_pkg_name
+Get Http Response
+Lcom.airpush_pkg_name
+Load native library
+content:sms_keyword
+МВД РФ за_keyword
+LogCatBroadcaster
+修改器_name
+killall_cmd
+kill -9 _cmd
+mkdir_cmd
+免流_name
+Access SDcard
+私房_name
+content://browser/bookmarks_keyword
+Get Apps running
+Exec SQL cmds
+设置成功_keyword
+Lcom.adwo_pkg_name
+啪啪啪_name
+快播_name
+ADRTLogCatReader_keyword
+Lcom.appquanta_pkg_name
+上传_keyword
+adb shell_cmd
+tel:**21*_keyword
+Call Phone
+Get Resource From Raw File
+ls -l_cmd
+Read Raw File
+setComponent_api
+涩涩_name
+午夜_name
+欲女_name
+欲爱_name
+getAssets_api
+mailto_keyword
+awareDeviceAdminDisable
+LockNow and ResetPassword
+AES_keyword
+免费_keyword
+9999#_keyword
+涩欲_name
+MoneyPak_keyword
+sortTextFlavorsByType_api
+sh_cmd
+Use HttpURLConnection
+Lock Mixed Feature 2
+诱惑_name
+Lcom.fractalist_pkg_name
+getAccountsByType
+sendTextMessage_api
+Lcom.wimipay_pkg_name
+restorecon -R _cmd
+su_cmd
+播播_name
+Lcom.jpush_pkg_name
+startActivityForResult_api
+Qiwi +_keyword
+divide the message
+Get attribute from SharedPreferences
+islj_keyword
+Lcom.lock_pkg_name
+情色_name
+Browser.BOOKMARKS_URI_keyword
+tel:%23%2321%23_keyword
+content://sms/conversations/_keyword
+Get Running Services
+sendMultipartTextMessage_api
+getText_and_equals
+Use WebView
+Forward SMS
+收取_keyword

@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">packAntiRansom</string>
+    <string name="decypte">"解密"</string>
+    <string name="childAPK">"开启解锁保护"</string>
+</resources>
