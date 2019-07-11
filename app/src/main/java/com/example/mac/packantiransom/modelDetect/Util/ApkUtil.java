@@ -5,6 +5,7 @@ import android.content.pm.PackageManager;
 import android.util.Log;
 
 import org.jf.dexlib2.DexFileFactory;
+import org.jf.dexlib2.dexbacked.DexBackedClassDef;
 import org.jf.dexlib2.dexbacked.DexBackedDexFile;
 import org.jf.dexlib2.dexbacked.reference.DexBackedStringReference;
 import org.jf.dexlib2.iface.ClassDef;
@@ -26,6 +27,7 @@ import java.util.List;
 import java.util.Set;
 
 import lanchon.multidexlib2.EmptyMultiDexContainerException;
+import lanchon.multidexlib2.MultiDexContainerBackedDexFile;
 
 //import org.jf.dexlib2.iface.DexFile;
 
@@ -44,7 +46,7 @@ public class ApkUtil {
      ***/
     /*** 方法B： 用于对arg6所示软件进行dex分析，获取API package信息*/
     static DexFile getDexFile(String arg6) {
-        lanchon.multidexlib2.MultiDexContainerBackedDexFile v6_2;
+        MultiDexContainerBackedDexFile v6_2;
         lanchon.multidexlib2.SingletonDexContainer v3_2;
         File v2;
         DexFile v1=null;
@@ -56,7 +58,7 @@ public class ApkUtil {
                 if(((MultiDexContainer)v3).getDexEntryNames().size() == 0) {
                     throw new EmptyMultiDexContainerException(v2.toString());
                 }
-                v6_2 = new lanchon.multidexlib2.MultiDexContainerBackedDexFile(((MultiDexContainer)v3));
+                v6_2 = new MultiDexContainerBackedDexFile(((MultiDexContainer)v3));
             }
             else if(!v2.isFile()) {
                 throw new FileNotFoundException(v2.toString());
@@ -66,14 +68,14 @@ public class ApkUtil {
                 if(((MultiDexContainer)v3_1).getDexEntryNames().size() == 0) {
                     throw new EmptyMultiDexContainerException(v2.toString());
                 }
-                v6_2 = new lanchon.multidexlib2.MultiDexContainerBackedDexFile(((MultiDexContainer)v3_1));// 03.21 在这里出问题啦
+                v6_2 = new MultiDexContainerBackedDexFile(((MultiDexContainer)v3_1));// 03.21 在这里出问题啦
             }
             else {
                 v3_2 = new lanchon.multidexlib2.SingletonDexContainer(lanchon.multidexlib2.RawDexIO.readRawDexFile(v2,null));
                 if(((MultiDexContainer)v3_2).getDexEntryNames().size() == 0) {
                     throw new EmptyMultiDexContainerException(v2.toString());
                 }
-                v6_2 = new lanchon.multidexlib2.MultiDexContainerBackedDexFile(((MultiDexContainer)v3_2));
+                v6_2 = new MultiDexContainerBackedDexFile(((MultiDexContainer)v3_2));
             }
         }
         catch(Exception v6) {
@@ -133,12 +135,16 @@ public class ApkUtil {
         try {
             ArrayList methodsName = new ArrayList();
             String c_m=null;
+//            for(DexBackedClassDef classdef:arg2.getClasses()){
             for(ClassDef classdef :arg2.getClasses()){
+//            for(Object classdef :arg2.getClasses()){
+
                 for (Method m:classdef.getMethods()){
 //                    c_m=m.getClass().getName();
                     c_m=m.getDefiningClass();
                     c_m=c_m+"->"+m.getName();
                     methodsName.add(c_m);
+
                 }
 
             }
@@ -149,7 +155,7 @@ public class ApkUtil {
         }
     }
 
-    public static ArrayList<String> getClasses(DexFile arg2) {
+    public static ArrayList<String> getClassesA(DexFile arg2) {
         try {
             ArrayList<String> classesName = new ArrayList<>();
             String c_m=null;

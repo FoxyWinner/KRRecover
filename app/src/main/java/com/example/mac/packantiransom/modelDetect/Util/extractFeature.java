@@ -14,6 +14,7 @@ import android.content.res.AXmlResourceParser;
 import com.alibaba.fastjson.JSONObject;
 
 import org.jf.dexlib2.DexFileFactory;
+import org.jf.dexlib2.dexbacked.DexBackedClassDef;
 import org.jf.dexlib2.dexbacked.DexBackedDexFile;
 import org.jf.dexlib2.dexbacked.reference.DexBackedStringReference;
 
@@ -170,6 +171,40 @@ public class extractFeature {
             "Lcom.guohead", "Lcom.madhouse", "Lcom.fractalist", "Lcom.qq.e", "Lcom.e4a", "Lcom.airpush",
             "Lcom.h", "aide", "ADRTLogCatReader", "LogCatBroadcaster", "lock", "Llengmo.lockphone","Lcom.geinimi",
             "Lnet.youmi"};
+    String[] mali_API=new String[]{"Landroid/content/Context;","getSystemService","Landroid/content/ContextWrapper;","Landroid/view/ContextThemeWrapper;",
+        "Landroid/support/v7/view/ContextThemeWrapper;","Landroid/telephony/TelephonyManager;","getDeviceId",
+        "Landroid/content/pm/PackageManager;","getLaunchIntentForPackage","Lcom/android/append/LauncherActivity;","startActivity",
+        "Ljava/net/HttpURLConnection;","getInputStream","Landroid/content/ContentResolver;","update","Landroid/content/ContentProvider;",
+        "Landroid/content/ContentValues;","put","Lcn/cmgame/billing/api/GameInterface;","initializeApp","Lcn/cmgame/billing/api/GameInterface;","doBilling",
+        "Landroid/location/LocationManager;","getLastKnownLocation","Ljava/net/Socket;","Socket","Ljava/net/Socket;","getOutputStream",
+        "Landroid/net/LocalSocket;","getOutputStream","Ljava/net/ServerSocket;","ServerSocket","Ljava/net/ServerSocket;","getInputStream",
+        "Landroid/net/LocalSocket;","getInputStream","Landroid/content/Intent;","addCategory","Landroid/content/Intent;","createChooser","Ljava/io/FileInputStream;",
+            "Ljava/io/FileOutputStream;","Ljava/io/InputStream;","Ljava/io/OutputStream;","Ljava/io/File;","delete","Landroid/view/View;","setVisibility",
+        "Ldalvik/system/DexClassLoader;","Ldalvik/system/DexClassLoader;","loadClass","Ljava/lang/Runtime;","getRuntime", "Ljava/lang/Runtime;","exec",
+        "Landroid/view/WindowManager;","addView","Landroid/view/WindowManager/LayoutParams;", "Landroid/view/WindowManager/LayoutParams;","FLAG_FULLSCREEN",
+        "Landroid/view/WindowManager$LayoutParams;", "Landroid/telephony/TelephonyManager;","getNetworkOperator", "Landroid/telephony/TelephonyManager;",
+            "getSimOperator","Landroid/telephony/TelephonyManager;","getSubscriberId","Landroid/net/Proxy;","getDefaultHost","getDefaultPort",
+    "android.telephony.SmsManager;","sendTextMessage", "sendMultipartTextMessage",    "sendTextMessageWithoutPersisting",    "android.telephony.gsm.SmsManager;",
+    "sendMultipartTextMessage","Landroid/content/pm/PackageManager;","getInstalledPackages",    "Ljava/lang/Class;","forName",
+            "Ljava/lang/Object;","getClass","Ljava/lang/reflect/Method;","invoke",
+    "Landroid/provider/Settings$Secure;","getString","Landroid/content/pm/PackageManager;","setComponentEnabledSetting","Landroid/telephony/gsm/SmsMessage;","getoriginatingAddress",
+    "Landroid/telephony/SmsMessage;","getoriginatingAddress","Landroid/telephony/SmsMessage;","getDisplayoriginatingAddress",
+    "Landroid/app/ActivityManager;","getProcessMemoryInfo", "Landroid/app/AlarmManager;","setRepeating", "Landroid/app/PendingIntent;","getBroadcast",
+    "Landroid/app/AlarmManager;","cancel",    "Landroid/content/ContentResolver;","delete",    "Landroid/provider/Telephony$Sms;","getDefaultSmsPackage",
+    "Landroid/media/AudioManager;","setRingerMode",    "Landroid/os/Build$VERSION",    "android.telephony.gsm.SmsMessage;","getMessageBody",
+    "Landroid/telephony/SmsMessage;","getMessageBody",    "Landroid/telephony/SmsMessage;","getDisplayMessageBody",    "Landroid/os/Process;","killProcess",
+    "Landroid/app/ActivityManager;","killBackgroundProcesses",    "Ljavax/crypto/Cipher;","getInstance",    "Ljavax/crypto/spec/SecretKeySpec;",
+    "Ljavax/crypto/Cipher;",    "Ljavax/crypto/Cipher;","doFinal",    "Landroid/telephony/TelephonyManager;","getLine1Number",    "Ljava/lang/Thread;",
+    "start",    "Ljava/lang/Class;","getResourceAsStream",    "Lorg/apache/http/impl/client/DefaultHttpClient;","execute",
+    "Lorg/apache/http/HttpResponse;","getEntity",    "Landroid/os/Environment;","getDataDirectory",    "Landroid/os/Environment;","getDownloadCacheDirectory",
+    "Landroid/os/Environment;","getExternalStorageDirectory",    "Landroid/os/Environment;","getExternalStorageState",    "Landroid/app/ActivityManager;",
+            "getRunningAppProcesses",    "Landroid/app/ActivityManager;","getRunningTasks",    "Landroid/database/sqlite/SQLiteDatabase;","execSQL",
+    "Landroid/content/res/Resources;","openRawResource",    "Ljava/io/InputStreamReader",    "Landroid/app/admin/DeviceAdminReceiver;","onDisableRequested",
+    "Landroid/app/admin/DevicePolicyManager", "resetPassword",    "Landroid/app/admin/DevicePolicyManager", "lockNow",     "Landroid/app/admin/DevicePolicyManager",
+    "Ljava/net/HttpURLConnection;","connect",    "Ljava/net/HttpURLConnection;","getOutputStream",    "Landroid/webkit/WebViewClient;"
+    };
+    Map<String,Boolean> map_mali_API=new HashMap<>();
+
 
     boolean actionCC =  false;
     boolean device_admin_permission=false;
@@ -254,6 +289,7 @@ public class extractFeature {
         while (iterator.hasNext()) {
             DexBackedStringReference current = iterator.next();
             s=current.getString();
+
             if(s.contains("android.provider.Telephony.ACTION_CHANGE_DEFAULT")){
                 actionCC=true;
             }else if(s.contains("android.app.action.ADD_DEVICE_ADMIN")){
@@ -290,6 +326,14 @@ public class extractFeature {
                 phoneList.add(s);
             }else if(detect_url(s)){
                 urlList.add(s);
+            }
+
+            for(String keyword:mali_API){
+                if(s.equals(keyword)){
+                    if(!map_mali_API.containsKey(s)){
+                        map_mali_API.put(s,true);
+                    }
+                }
             }
 
 
@@ -432,32 +476,57 @@ public class extractFeature {
 
         /** 开始 ***/
 
+        // 表示执行锁机并重置密码操作
+//        getreset = list(self.dx.find_methods("Landroid/app/admin/DevicePolicyManager", "resetPassword", "."))
+//        getLock = list(self.dx.find_methods("Landroid/app/admin/DevicePolicyManager", "lockNow", "."))
+//        getSth = list(self.dx.find_methods("Landroid/app/admin/DevicePolicyManager", "", "."))
+        boolean  getreset =  map_mali_API.containsKey("Landroid/app/admin/DevicePolicyManager;") && map_mali_API.containsKey("resetPassword");
+        boolean  getLock = map_mali_API.containsKey("Landroid/app/admin/DevicePolicyManager;") && map_mali_API.containsKey("lockNow");
+        boolean  getSth = map_mali_API.containsKey("Landroid/app/admin/DevicePolicyManager;") ;
+        if (getreset && getLock){
+            potential_misBhve.add("LockNow and ResetPassword");
+        }
+
 
         /*** 表示读取了手机的 IMEI 码*/
-        boolean  Context_getSystemService = methods.contains(String.valueOf("Landroid/content/Context;->getSystemService"));
-
-        boolean  ContextWrapper_getSystemService = methods.contains("Landroid/content/ContextWrapper;->getSystemService");
-        boolean  view_ContextThemeWrapper_getSystemService = methods.contains("Landroid/view/ContextThemeWrapper;->getSystemService");
-        boolean  v7_ContextThemeWrapper_getSystemService = methods.contains("Landroid/support/v7/view/ContextThemeWrapper;->getSystemService");
-        boolean  TelephonyManager_getDeviceId = methods.contains("Landroid/telephony/TelephonyManager;->getDeviceId");
+//        boolean  Context_getSystemService = methods.contains(String.valueOf("Landroid/content/Context;->getSystemService"));
+//        boolean  ContextWrapper_getSystemService = methods.contains("Landroid/content/ContextWrapper;->getSystemService");
+//        boolean  view_ContextThemeWrapper_getSystemService = methods.contains("Landroid/view/ContextThemeWrapper;->getSystemService");
+//        boolean  v7_ContextThemeWrapper_getSystemService = methods.contains("Landroid/support/v7/view/ContextThemeWrapper;->getSystemService");
+//        boolean  TelephonyManager_getDeviceId = methods.contains("Landroid/telephony/TelephonyManager;->getDeviceId");
+        boolean  Context_getSystemService =  map_mali_API.containsKey("Landroid/content/Context;") && map_mali_API.containsKey("getSystemService");
+        boolean  ContextWrapper_getSystemService = map_mali_API.containsKey("Landroid/content/ContextWrapper;") && map_mali_API.containsKey("getSystemService");
+        boolean  view_ContextThemeWrapper_getSystemService = map_mali_API.containsKey("Landroid/view/ContextThemeWrapper;") && map_mali_API.containsKey("getSystemService");
+        boolean  v7_ContextThemeWrapper_getSystemService = map_mali_API.containsKey("Landroid/support/v7/view/ContextThemeWrapper;") && map_mali_API.containsKey("getSystemService");
+        boolean  TelephonyManager_getDeviceId = map_mali_API.containsKey("Landroid/telephony/TelephonyManager;") && map_mali_API.containsKey("getDeviceId");
         if( (Context_getSystemService || ContextWrapper_getSystemService || view_ContextThemeWrapper_getSystemService || v7_ContextThemeWrapper_getSystemService) && TelephonyManager_getDeviceId) {
             potential_misBhve.add("Read IMEI");  // 判断是否进行了IMEI的读取
         }
 
         /** 特征 Does Cipher, 表示 执行了 加密操作, 下列 API 为执行加密操作使用的 加密函数 **/
-        boolean Cipher_getInstance=methods.contains("Ljavax/crypto/Cipher;->getInstance");
-        boolean SecretKeySpec_init = methods.contains("Ljavax/crypto/spec/SecretKeySpec;-><init>");
-        boolean Cipher_init = methods.contains("Ljavax/crypto/Cipher;-><init>");
-        boolean Cipher_doFinal =methods.contains("Ljavax/crypto/Cipher;->doFinal");
+//        boolean Cipher_getInstance=methods.contains("Ljavax/crypto/Cipher;->getInstance");
+//        boolean SecretKeySpec_init = methods.contains("Ljavax/crypto/spec/SecretKeySpec;-><init>");
+//        boolean Cipher_init = methods.contains("Ljavax/crypto/Cipher;-><init>");
+//        boolean Cipher_doFinal =methods.contains("Ljavax/crypto/Cipher;->doFinal");
+
+        boolean Cipher_getInstance=map_mali_API.containsKey("Ljavax/crypto/Cipher;") && map_mali_API.containsKey("getInstance");
+        boolean SecretKeySpec_init = map_mali_API.containsKey("Ljavax/crypto/spec/SecretKeySpec;");
+        boolean Cipher_init = map_mali_API.containsKey("Ljavax/crypto/Cipher;");
+        boolean Cipher_doFinal =map_mali_API.containsKey("Ljavax/crypto/Cipher;") && map_mali_API.containsKey("doFinal");
         if (((Cipher_getInstance && SecretKeySpec_init && Cipher_init) && Cipher_doFinal) || IvParameterSpec){
             potential_misBhve.add("Does Cipher");   //判断是否使用加密函数
         }
 
         // 表示是否访问 SDcard
-        boolean Environment_getDataDirectory = methods.contains(String.valueOf("Landroid/os/Environment;->getDataDirectory"));
-        boolean Environment_getDownloadCacheDirectory = methods.contains(String.valueOf("Landroid/os/Environment;->getDownloadCacheDirectory"));
-        boolean Environment_getExternalStorageDirectory = methods.contains(String.valueOf("Landroid/os/Environment;->getExternalStorageDirectory"));
-        boolean Environment_getExternalStorageState = methods.contains(String.valueOf("Landroid/os/Environment;->getExternalStorageState"));
+//        boolean Environment_getDataDirectory = methods.contains(String.valueOf("Landroid/os/Environment;->getDataDirectory"));
+//        boolean Environment_getDownloadCacheDirectory = methods.contains(String.valueOf("Landroid/os/Environment;->getDownloadCacheDirectory"));
+//        boolean Environment_getExternalStorageDirectory = methods.contains(String.valueOf("Landroid/os/Environment;->getExternalStorageDirectory"));
+//        boolean Environment_getExternalStorageState = methods.contains(String.valueOf("Landroid/os/Environment;->getExternalStorageState"));
+
+                boolean Environment_getDataDirectory = map_mali_API.containsKey("Landroid/os/Environment;") && map_mali_API.containsKey("getDataDirectory");
+        boolean Environment_getDownloadCacheDirectory = map_mali_API.containsKey("Landroid/os/Environment;") && map_mali_API.containsKey("getDownloadCacheDirectory");
+        boolean Environment_getExternalStorageDirectory = map_mali_API.containsKey("Landroid/os/Environment;") && map_mali_API.containsKey("getExternalStorageDirectory");
+        boolean Environment_getExternalStorageState = map_mali_API.containsKey("Landroid/os/Environment;") && map_mali_API.containsKey("getExternalStorageState");
         if (Environment_getDataDirectory || Environment_getDownloadCacheDirectory ||
         Environment_getExternalStorageDirectory || Environment_getExternalStorageState ){
             potential_misBhve.add("Access SDcard");
@@ -465,24 +534,28 @@ public class extractFeature {
 
 
         // 表示获取地理位置
-        boolean location = methods.contains("Landroid/location/LocationManager;->getLastKnownLocation");
+//        boolean location = methods.contains("Landroid/location/LocationManager;->getLastKnownLocation");
+        boolean location = map_mali_API.containsKey("Landroid/location/LocationManager;") && map_mali_API.containsKey("getLastKnownLocation");
         if ((Context_getSystemService || ContextWrapper_getSystemService || view_ContextThemeWrapper_getSystemService
                 || v7_ContextThemeWrapper_getSystemService) && location) {
             potential_misBhve.add("Get Location");
         }
 
-        // 表示执行锁机并重置密码操作
-        boolean getreset = methods.contains("Landroid/app/admin/DevicePolicyManager;->resetPassword");
-        boolean getLock = methods.contains("Landroid/app/admin/DevicePolicyManager;->lockNow");
-        boolean getSth = methods.contains("Landroid/app/admin/DevicePolicyManager;->");
-        if (getreset && getLock) {
-            potential_misBhve.add("LockNow && ResetPassword");
-        }
+//        // 表示执行锁机并重置密码操作
+//        boolean getreset = methods.contains("Landroid/app/admin/DevicePolicyManager;->resetPassword");
+//        boolean getLock = methods.contains("Landroid/app/admin/DevicePolicyManager;->lockNow");
+//        boolean getSth = methods.contains("Landroid/app/admin/DevicePolicyManager;->");
+//        if (getreset && getLock) {
+//            potential_misBhve.add("LockNow and ResetPassword");
+//        }
 
         // 全屏类锁机特征
-        boolean getWindow = methods.contains("Landroid/view/WindowManager/LayoutParams;->");
-        boolean getFlag = methods.contains("Landroid/view/WindowManager/LayoutParams;->FLAG_FULLSCREEN");
-        boolean getFlag1 = methods.contains("Landroid/view/WindowManager$LayoutParams;->FLAG_FULLSCREEN");
+//        boolean getWindow = methods.contains("Landroid/view/WindowManager/LayoutParams;->");
+//        boolean getFlag = methods.contains("Landroid/view/WindowManager/LayoutParams;->FLAG_FULLSCREEN");
+//        boolean getFlag1 = methods.contains("Landroid/view/WindowManager$LayoutParams;->FLAG_FULLSCREEN");
+                boolean getWindow = map_mali_API.containsKey("Landroid/view/WindowManager/LayoutParams;");
+        boolean getFlag = map_mali_API.containsKey("Landroid/view/WindowManager/LayoutParams;") && map_mali_API.containsKey("FLAG_FULLSCREEN");
+        boolean getFlag1 = map_mali_API.containsKey("Landroid/view/WindowManager$LayoutParams;") && map_mali_API.containsKey("FLAG_FULLSCREEN");
         if ((getFlag && getWindow) || (getFlag1 && getWindow1)) {
             potential_misBhve.add("FLAG_FULLSCREEN");
         }
@@ -499,13 +572,21 @@ public class extractFeature {
         }
 
         // 出自论文的A类加密, 4.2节 加密中第一类方法, 论文出自 http){//cjc.ict.ac.cn/online/bfpub/wch-20171229104205.pdf
-        boolean getData1 = methods.contains("Landroid/content/Intent;->addCategory");
-        boolean getData2 = methods.contains("Landroid/content/Intent;->createChooser");
-        boolean getFileOp1 = methods.contains("Ljava/io/FileInputStream;->");
-        boolean getFileOp2 = methods.contains("Ljava/io/FileOutputStream;->");
-        boolean getFileOp3 = methods.contains("Ljava/io/InputStream;->");
-        boolean getFileOp4 = methods.contains("Ljava/io/OutputStream;->");
-        boolean getDel = methods.contains("Ljava/io/File;->delete");
+//        boolean getData1 = methods.contains("Landroid/content/Intent;->addCategory");
+//        boolean getData2 = methods.contains("Landroid/content/Intent;->createChooser");
+//        boolean getFileOp1 = methods.contains("Ljava/io/FileInputStream;->");
+//        boolean getFileOp2 = methods.contains("Ljava/io/FileOutputStream;->");
+//        boolean getFileOp3 = methods.contains("Ljava/io/InputStream;->");
+//        boolean getFileOp4 = methods.contains("Ljava/io/OutputStream;->");
+//        boolean getDel = methods.contains("Ljava/io/File;->delete");
+
+                boolean getData1 = map_mali_API.containsKey("Landroid/content/Intent;") && map_mali_API.containsKey("addCategory");
+        boolean getData2 = map_mali_API.containsKey("Landroid/content/Intent;") && map_mali_API.containsKey("createChooser");
+        boolean getFileOp1 = map_mali_API.containsKey("Ljava/io/FileInputStream;");
+        boolean getFileOp2 = map_mali_API.containsKey("Ljava/io/FileOutputStream;");
+        boolean getFileOp3 = map_mali_API.containsKey("Ljava/io/InputStream;");
+        boolean getFileOp4 = map_mali_API.containsKey("Ljava/io/OutputStream;");
+        boolean getDel = map_mali_API.containsKey("Ljava/io/File;") && map_mali_API.containsKey("delete");
         if (getData1 && getData2 && (Cipher_getInstance && Cipher_init && Cipher_doFinal) && SecretKeySpec_init
                 || IvParameterSpec && writeSD  && mount  && (getFileOp1 && getFileOp2 && getFileOp3 && getFileOp4)) {
             potential_misBhve.add("crypto_A");
@@ -517,46 +598,65 @@ public class extractFeature {
         }
 
         // 获取用户的手机号码
-        boolean getLinenum = methods.contains("Landroid/telephony/TelephonyManager;->getLine1Number");
+//        boolean getLinenum = methods.contains("Landroid/telephony/TelephonyManager;->getLine1Number");
+        boolean getLinenum = map_mali_API.containsKey("Landroid/telephony/TelephonyManager;") && map_mali_API.containsKey("getLine1Number");
         if ((Context_getSystemService || ContextWrapper_getSystemService || view_ContextThemeWrapper_getSystemService ||        v7_ContextThemeWrapper_getSystemService) && getLinenum){
             potential_misBhve.add("Get User Phone Number");
         }
 
         // 获取来信号码
-        boolean getori1 = methods.contains("Landroid/telephony/gsm/SmsMessage;->getoriginatingAddress");
-        boolean getori2 = methods.contains("Landroid/telephony/SmsMessage;->getoriginatingAddress");
-        boolean getori3 = methods.contains("Landroid/telephony/SmsMessage;->getDisplayoriginatingAddress");
+//        boolean getori1 = methods.contains("Landroid/telephony/gsm/SmsMessage;->getoriginatingAddress");
+//        boolean getori2 = methods.contains("Landroid/telephony/SmsMessage;->getoriginatingAddress");
+//        boolean getori3 = methods.contains("Landroid/telephony/SmsMessage;->getDisplayoriginatingAddress");
+
+                boolean getori1 = map_mali_API.containsKey("Landroid/telephony/gsm/SmsMessage;") && map_mali_API.containsKey("getoriginatingAddress");
+        boolean getori2 =map_mali_API.containsKey("Landroid/telephony/SmsMessage;") && map_mali_API.containsKey("getoriginatingAddress");
+        boolean getori3 = map_mali_API.containsKey("Landroid/telephony/SmsMessage;") && map_mali_API.containsKey("getDisplayoriginatingAddress");
         if (getori1 || getori2 || getori3) {
             potential_misBhve.add("Get originating address (Sender) of SMS Message");
         }
 
         // 获取短信内容
-        boolean getMess1 = methods.contains("android.telephony.gsm.SmsMessage;->getMessageBody");
-        boolean getMess2 = methods.contains("Landroid/telephony/SmsMessage;->getMessageBody");
-        boolean getMess3 = methods.contains("Landroid/telephony/SmsMessage;->getDisplayMessageBody");
+//        boolean getMess1 = methods.contains("android.telephony.gsm.SmsMessage;->getMessageBody");
+//        boolean getMess2 = methods.contains("Landroid/telephony/SmsMessage;->getMessageBody");
+//        boolean getMess3 = methods.contains("Landroid/telephony/SmsMessage;->getDisplayMessageBody");
+
+                boolean getMess1 = map_mali_API.containsKey("android.telephony.gsm.SmsMessage;") && map_mali_API.containsKey("getMessageBody");
+        boolean getMess2 = map_mali_API.containsKey("Landroid/telephony/SmsMessage;") && map_mali_API.containsKey("getMessageBody");
+        boolean getMess3 = map_mali_API.containsKey("Landroid/telephony/SmsMessage;") && map_mali_API.containsKey("getDisplayMessageBody");
         if (getMess1 || getMess2 || getMess3) {
             potential_misBhve.add("Get Message Body");
         }
 
         // 发送短信操作
-        boolean getSend1 = methods.contains("android.telephony.SmsManager;->sendTextMessage");
-        boolean getSend2 = methods.contains("android.telephony.SmsManager;->sendMultipartTextMessage");
-        boolean getSend3 = methods.contains("android.telephony.SmsManager;->sendTextMessageWithoutPersisting");
-        boolean getSend4 = methods.contains("android.telephony.gsm.SmsManager;->sendTextMessage");
-        boolean getSend5 = methods.contains("android.telephony.gsm.SmsManager;->sendMultipartTextMessage");
+//        boolean getSend1 = methods.contains("android.telephony.SmsManager;->sendTextMessage");
+//        boolean getSend2 = methods.contains("android.telephony.SmsManager;->sendMultipartTextMessage");
+//        boolean getSend3 = methods.contains("android.telephony.SmsManager;->sendTextMessageWithoutPersisting");
+//        boolean getSend4 = methods.contains("android.telephony.gsm.SmsManager;->sendTextMessage");
+//        boolean getSend5 = methods.contains("android.telephony.gsm.SmsManager;->sendMultipartTextMessage");
+
+                boolean getSend1 = map_mali_API.containsKey("android.telephony.SmsManager;") && map_mali_API.containsKey("sendTextMessage");
+        boolean getSend2 = map_mali_API.containsKey("android.telephony.SmsManager;") && map_mali_API.containsKey("sendMultipartTextMessage");
+        boolean getSend3 = map_mali_API.containsKey("android.telephony.SmsManager;") && map_mali_API.containsKey("sendTextMessageWithoutPersisting");
+        boolean getSend4 = map_mali_API.containsKey("android.telephony.gsm.SmsManager;") && map_mali_API.containsKey("sendTextMessage");
+        boolean getSend5 = map_mali_API.containsKey("android.telephony.gsm.SmsManager;") && map_mali_API.containsKey("sendMultipartTextMessage");
         if (getSend1 || getSend2 || getSend3 || getSend4 || getSend5) {
             potential_misBhve.add("Send SMS");
         }
 
         // 获取正在运行的应用操作
-        boolean getActivate1 = methods.contains("Landroid/app/ActivityManager;->getRunningAppProcesses");
-        boolean getActivate2 = methods.contains("Landroid/app/ActivityManager;->getRunningTasks");
+//        boolean getActivate1 = methods.contains("Landroid/app/ActivityManager;->getRunningAppProcesses");
+//        boolean getActivate2 = methods.contains("Landroid/app/ActivityManager;->getRunningTasks");
+
+                boolean getActivate1 = map_mali_API.containsKey("Landroid/app/ActivityManager;") && map_mali_API.containsKey("getRunningAppProcesses");
+        boolean getActivate2 = map_mali_API.containsKey("Landroid/app/ActivityManager;") && map_mali_API.containsKey("getRunningTasks");
         if (getActivate1 || getActivate2) {
             potential_misBhve.add("Get Apps running");
         }
 
         // 隐藏图标操作, 拦截马特征
-        boolean getHideIcon = methods.contains("Landroid/content/pm/PackageManager;->setComponentEnabledSetting");
+//        boolean getHideIcon = methods.contains("Landroid/content/pm/PackageManager;->setComponentEnabledSetting");
+        boolean getHideIcon = map_mali_API.containsKey("Landroid/content/pm/PackageManager;") && map_mali_API.containsKey("setComponentEnabledSetting");
         if (getHideIcon) {
             potential_misBhve.add("Hide the Icon");
         }
@@ -607,33 +707,48 @@ public class extractFeature {
         }
 
         // 使用TCP, 进行网络链接
-        boolean openTCP = methods.contains("Ljava/net/Socket;->Socket");
-        boolean getOS1 = methods.contains("Ljava/net/Socket;->getOutputStream");
-        boolean getOS2 = methods.contains("Landroid/net/LocalSocket;->getOutputStream");
-        boolean ServerSocket = methods.contains("Ljava/net/ServerSocket;->ServerSocket");
-        boolean getIS1 = methods.contains("Ljava/net/ServerSocket;->getInputStream");
-        boolean getIS2 = methods.contains("Landroid/net/LocalSocket;->getInputStream");
+//        boolean openTCP = methods.contains("Ljava/net/Socket;->Socket");
+//        boolean getOS1 = methods.contains("Ljava/net/Socket;->getOutputStream");
+//        boolean getOS2 = methods.contains("Landroid/net/LocalSocket;->getOutputStream");
+//        boolean ServerSocket = methods.contains("Ljava/net/ServerSocket;->ServerSocket");
+//        boolean getIS1 = methods.contains("Ljava/net/ServerSocket;->getInputStream");
+//        boolean getIS2 = methods.contains("Landroid/net/LocalSocket;->getInputStream");
+
+                boolean openTCP = map_mali_API.containsKey("Ljava/net/Socket;") && map_mali_API.containsKey("Socket");
+        boolean getOS1 = map_mali_API.containsKey("Ljava/net/Socket;") && map_mali_API.containsKey("getOutputStream");
+        boolean getOS2 = map_mali_API.containsKey("Landroid/net/LocalSocket;") && map_mali_API.containsKey("getOutputStream");
+        boolean ServerSocket = map_mali_API.containsKey("Ljava/net/ServerSocket;") && map_mali_API.containsKey("ServerSocket");
+        boolean getIS1 = map_mali_API.containsKey("Ljava/net/ServerSocket;") && map_mali_API.containsKey("getInputStream");
+        boolean getIS2 = map_mali_API.containsKey("Landroid/net/LocalSocket;") && map_mali_API.containsKey("getInputStream");
         if (openTCP || getOS1 || getOS2 || ServerSocket || getIS1 || getIS2) {
             potential_misBhve.add("Use TCP");
         }
 
         // 获取手机中已安装的应用
-        boolean getIP = methods.contains("Landroid/content/pm/PackageManager;->getInstalledPackages");
+//        boolean getIP = methods.contains("Landroid/content/pm/PackageManager;->getInstalledPackages");
+        boolean getIP = map_mali_API.containsKey("Landroid/content/pm/PackageManager;") && map_mali_API.containsKey("getInstalledPackages");
         if (getIP) {
             potential_misBhve.add("Get Apps installed");
         }
 
         // 使用反射, 通过反射执行某些操作
-        boolean reflect_forName = methods.contains("Ljava/lang/Class;->forName");
-        boolean reflect_getClass = methods.contains("Ljava/lang/Object;->getClass");
-        boolean invoke = methods.contains("Ljava/lang/reflect/Method;->invoke");
+//        boolean reflect_forName = methods.contains("Ljava/lang/Class;->forName");
+//        boolean reflect_getClass = methods.contains("Ljava/lang/Object;->getClass");
+//        boolean invoke = methods.contains("Ljava/lang/reflect/Method;->invoke");
+
+                boolean reflect_forName = map_mali_API.containsKey("Ljava/lang/Class;") && map_mali_API.containsKey("orName");
+        boolean reflect_getClass = map_mali_API.containsKey("Ljava/lang/Object;") && map_mali_API.containsKey("getClass");
+        boolean invoke = map_mali_API.containsKey("Ljava/lang/reflect/Method;") && map_mali_API.containsKey("invoke");
         if ((reflect_forName || reflect_getClass) && invoke) {
             potential_misBhve.add("Use Reflect");
         }
 
         // 使用动态加载
-        boolean dynamic_load = methods.contains("Ldalvik/system/DexClassLoader;-><init>");
-        boolean load_class = methods.contains("Ldalvik/system/DexClassLoader;->loadClass");
+//        boolean dynamic_load = methods.contains("Ldalvik/system/DexClassLoader;-><init>");
+//        boolean load_class = methods.contains("Ldalvik/system/DexClassLoader;->loadClass");
+
+                boolean dynamic_load = map_mali_API.containsKey("Ldalvik/system/DexClassLoader;");
+        boolean load_class =map_mali_API.containsKey("Ldalvik/system/DexClassLoader;") && map_mali_API.containsKey("loadClass");
         if (dynamic_load || load_class) {
             potential_misBhve.add("Use Dynamic Load");
         }
@@ -652,42 +767,56 @@ public class extractFeature {
         }
 
         // 第二种设置默认短信应用, 即实现方式不同
-        boolean getDSM = methods.contains("Landroid/provider/Telephony$Sms;->getDefaultSmsPackage");
+//        boolean getDSM = methods.contains("Landroid/provider/Telephony$Sms;->getDefaultSmsPackage");
+        boolean getDSM = map_mali_API.containsKey("Landroid/provider/Telephony$Sms;") && map_mali_API.containsKey("getDefaultSmsPackage");
         if (getDSM && actionCC) {
             potential_misBhve.add("Set default SMS app");
         }
 
         // 更新短信数据库的内容
-        boolean SMSStatusUpdate1 = methods.contains("Landroid/content/ContentResolver;->update");
-        boolean SMSStatusUpdate2 = methods.contains("Landroid/content/ContentProvider;->update");
-        boolean SMSStatusPut = methods.contains("Landroid/content/ContentValues;->put");
+//        boolean SMSStatusUpdate1 = methods.contains("Landroid/content/ContentResolver;->update");
+//        boolean SMSStatusUpdate2 = methods.contains("Landroid/content/ContentProvider;->update");
+//        boolean SMSStatusPut = methods.contains("Landroid/content/ContentValues;->put");
+
+                boolean SMSStatusUpdate1 = map_mali_API.containsKey("Landroid/content/ContentResolver;") && map_mali_API.containsKey("update");
+        boolean SMSStatusUpdate2 = map_mali_API.containsKey("Landroid/content/ContentProvider;") && map_mali_API.containsKey("update");
+        boolean SMSStatusPut = map_mali_API.containsKey("Landroid/content/ContentValues;") && map_mali_API.containsKey("put");
         if ((SMSStatusUpdate1 || SMSStatusUpdate2) && SMSStatusPut) {
             potential_misBhve.add("Update SMS status");
         }
 
         // 重复启动应用, 定时任务, 通过隐式 intent 启动
-        boolean AlarmManagerRepeating = methods.contains("Landroid/app/AlarmManager;->setRepeating");
-        boolean getBroadcast = methods.contains("Landroid/app/PendingIntent;->getBroadcast");
+//        boolean AlarmManagerRepeating = methods.contains("Landroid/app/AlarmManager;->setRepeating");
+//        boolean getBroadcast = methods.contains("Landroid/app/PendingIntent;->getBroadcast");
+
+                boolean AlarmManagerRepeating = map_mali_API.containsKey("Landroid/app/AlarmManager;") && map_mali_API.containsKey("setRepeating");
+        boolean getBroadcast = map_mali_API.containsKey("Landroid/app/PendingIntent;") && map_mali_API.containsKey("getBroadcast");
         if (AlarmManagerRepeating && getSystemService && getBroadcast) {
             potential_misBhve.add("Set app start repeatly");
         }
 
         // 获取resources对象, 访问应用程序中存在的文件资源
-        boolean getResourceAsStream = methods.contains("Ljava/lang/Class;->getResourceAsStream");
+//        boolean getResourceAsStream = methods.contains("Ljava/lang/Class;->getResourceAsStream");
+        boolean getResourceAsStream = map_mali_API.containsKey("Ljava/lang/Class;") && map_mali_API.containsKey("getResourceAsStream");
         if (getResources || getResourceAsStream) {
             potential_misBhve.add("Get Resources");
         }
 
         // 使用 Webview 进行网络访问
-        boolean webView = methods.contains("Landroid/webkit/WebViewClient;-><init>");
+//        boolean webView = methods.contains("Landroid/webkit/WebViewClient;-><init>");
+        boolean webView = map_mali_API.containsKey("Landroid/webkit/WebViewClient;");
         if (webView) {
             potential_misBhve.add("Use WebView");
         }
 
         // 获取 SIM 卡信息 以及网络状态
-        boolean SimInfo = methods.contains("Landroid/telephony/TelephonyManager;->getNetworkOperator");
-        boolean SimInfo_2 = methods.contains("Landroid/telephony/TelephonyManager;->getSimOperator");
-        boolean SimInfo_3 = methods.contains("Landroid/telephony/TelephonyManager;->getSubscriberId");
+//        boolean SimInfo = methods.contains("Landroid/telephony/TelephonyManager;->getNetworkOperator");
+//        boolean SimInfo_2 = methods.contains("Landroid/telephony/TelephonyManager;->getSimOperator");
+//        boolean SimInfo_3 = methods.contains("Landroid/telephony/TelephonyManager;->getSubscriberId");
+
+                boolean SimInfo = map_mali_API.containsKey("Landroid/telephony/TelephonyManager;") && map_mali_API.containsKey("getNetworkOperator");
+        boolean SimInfo_2 = map_mali_API.containsKey("Landroid/telephony/TelephonyManager;") && map_mali_API.containsKey("getSimOperator");
+        boolean SimInfo_3 = map_mali_API.containsKey("Landroid/telephony/TelephonyManager;") && map_mali_API.containsKey("getSubscriberId");
         if (SimInfo || SimInfo_2 || SimInfo_3) {
             potential_misBhve.add("Get SIM Information");
         }
@@ -709,13 +838,15 @@ public class extractFeature {
 
 
         // 删除短信
-        boolean DeleteSMS = methods.contains("Landroid/content/ContentResolver;->delete");
+//        boolean DeleteSMS = methods.contains("Landroid/content/ContentResolver;->delete");
+        boolean DeleteSMS = map_mali_API.containsKey("Landroid/content/ContentResolver;") && map_mali_API.containsKey("delete");
         if (DeleteSMS) {
             potential_misBhve.add("Delete SMS");
         }
         // 申请权限, 会在最上层显示应用
         //         addView = methods.contains(";->addView");
-        boolean addView = methods.contains("Landroid/view/WindowManager;->addView");
+//        boolean addView = methods.contains("Landroid/view/WindowManager;->addView");
+        boolean addView = map_mali_API.containsKey("Landroid/view/WindowManager;") && map_mali_API.containsKey("addView");
         if (addView && alertWindow) {
             potential_misBhve.add("alertWindow");
         }
@@ -726,25 +857,29 @@ public class extractFeature {
         }
 
         // 获取进程对内存的使用大小
-        boolean getProcessMemoryInfo = methods.contains("Landroid/app/ActivityManager;->getProcessMemoryInfo");
+//        boolean getProcessMemoryInfo = methods.contains("Landroid/app/ActivityManager;->getProcessMemoryInfo");
+        boolean getProcessMemoryInfo = map_mali_API.containsKey("Landroid/app/ActivityManager;") && map_mali_API.containsKey("getProcessMemoryInfo");
         if (getProcessMemoryInfo) {
             potential_misBhve.add("getProcessMemoryInfo");
         }
 
         // 重写"用户申请取消设备管理器权限时所调用的方法"
-        boolean  onDisableRequested = methods.contains("Landroid/app/admin/DeviceAdminReceiver;->onDisableRequested");
+//        boolean  onDisableRequested = methods.contains("Landroid/app/admin/DeviceAdminReceiver;->onDisableRequested");
+        boolean  onDisableRequested = map_mali_API.containsKey("Landroid/app/admin/DeviceAdminReceiver;") && map_mali_API.containsKey("onDisableRequested");
         if (onDisabled || onDisableRequested) {
             potential_misBhve.add("awareDeviceAdminDisable");
         }
 
         // 设置铃声模式, 比如静音, 震动等
-        boolean  setRingerMode = methods.contains("Landroid/media/AudioManager;->setRingerMode");
+//        boolean  setRingerMode = methods.contains("Landroid/media/AudioManager;->setRingerMode");
+        boolean  setRingerMode = map_mali_API.containsKey("Landroid/media/AudioManager;") && map_mali_API.containsKey("setRingerMode");
         if (setRingerMode) {
             potential_misBhve.add("setRingerMode");
         }
 
         // 查询数据库（system preferences）
-        boolean getString = methods.contains("Landroid/provider/Settings$Secure;->getString");
+//        boolean getString = methods.contains("Landroid/provider/Settings$Secure;->getString");
+        boolean getString = map_mali_API.containsKey("Landroid/provider/Settings$Secure;") && map_mali_API.containsKey("getString");
         if (getString) {
             potential_misBhve.add("getString");
         }
@@ -757,9 +892,13 @@ public class extractFeature {
             potential_misBhve.add("getText_and_equals");
         }
         // 使用 http 网络服务
-        boolean HttpURLConnection_connect = methods.contains("Ljava/net/HttpURLConnection;->connect");
-        boolean HttpURLConnection_getOutputStream = methods.contains("Ljava/net/HttpURLConnection;->getOutputStream");
-        boolean HttpURLConnection_getInputStream = methods.contains("Ljava/net/HttpURLConnection;->getInputStream");
+//        boolean HttpURLConnection_connect = methods.contains("Ljava/net/HttpURLConnection;->connect");
+//        boolean HttpURLConnection_getOutputStream = methods.contains("Ljava/net/HttpURLConnection;->getOutputStream");
+//        boolean HttpURLConnection_getInputStream = methods.contains("Ljava/net/HttpURLConnection;->getInputStream");
+
+                boolean HttpURLConnection_connect = map_mali_API.containsKey("Ljava/net/HttpURLConnection;") && map_mali_API.containsKey("connect");
+        boolean HttpURLConnection_getOutputStream = map_mali_API.containsKey("Ljava/net/HttpURLConnection;") && map_mali_API.containsKey("getOutputStream");
+        boolean HttpURLConnection_getInputStream = map_mali_API.containsKey("Ljava/net/HttpURLConnection;") && map_mali_API.containsKey("getInputStream");
         if (HttpURLConnection_connect || HttpURLConnection_getOutputStream) {
             potential_misBhve.add("Use HttpURLConnection");
         }
@@ -769,8 +908,11 @@ public class extractFeature {
         }
 
         // 获取 http 响应
-        boolean DefaultHttpClient_execute = methods.contains("Lorg/apache/http/impl/client/DefaultHttpClient;->execute");
-        boolean HttpResponse_getEntity = methods.contains("Lorg/apache/http/HttpResponse;->getEntity");
+//        boolean DefaultHttpClient_execute = methods.contains("Lorg/apache/http/impl/client/DefaultHttpClient;->execute");
+//        boolean HttpResponse_getEntity = methods.contains("Lorg/apache/http/HttpResponse;->getEntity");
+
+                boolean DefaultHttpClient_execute = map_mali_API.containsKey("Lorg/apache/http/impl/client/DefaultHttpClient;") && map_mali_API.containsKey("execute");
+        boolean HttpResponse_getEntity = map_mali_API.containsKey("Lorg/apache/http/HttpResponse;") && map_mali_API.containsKey("getEntity");
         if (DefaultHttpClient_execute && HttpResponse_getEntity){
             potential_misBhve.add("Get Http Response");
         }
@@ -786,25 +928,29 @@ public class extractFeature {
         }
 
         // 通过资源对象访问应用中的资源文件
-        boolean openRawResource = methods.contains("Landroid/content/res/Resources;->openRawResource");
+//        boolean openRawResource = methods.contains("Landroid/content/res/Resources;->openRawResource");
+        boolean openRawResource = map_mali_API.containsKey("Landroid/content/res/Resources;") && map_mali_API.containsKey("openRawResource");
         if (getResources && openRawResource){
             potential_misBhve.add("Get Resource From Raw File");
         }
 
         // 读取资源文件
-        boolean InputStreamReader = methods.contains("Ljava/io/InputStreamReader");
+//        boolean InputStreamReader = methods.contains("Ljava/io/InputStreamReader");
+        boolean InputStreamReader = map_mali_API.containsKey("Ljava/io/InputStreamReader");
         if (getResources && openRawResource && InputStreamReader){
             potential_misBhve.add("Read Raw File");
         }
 
         // 设置 UI 的可见度
-        boolean setVisibility = methods.contains("Landroid/view/View;->setVisibility");
+//        boolean setVisibility = methods.contains("Landroid/view/View;->setVisibility");
+        boolean setVisibility = map_mali_API.containsKey("Landroid/view/View;") && map_mali_API.containsKey("setVisibility");
         if (setVisibility){
             potential_misBhve.add("Set UI Visibility");
         }
 
         // 包含多个字符串，比如 sdk 版本
-        boolean BuildVersion = methods.contains("Landroid/os/Build$VERSION");
+//        boolean BuildVersion = methods.contains("Landroid/os/Build$VERSION");
+        boolean BuildVersion = map_mali_API.containsKey("Landroid/os/Build$VERSION");
         if (BuildVersion){
             potential_misBhve.add("Get Build Version");
         }
@@ -823,21 +969,27 @@ public class extractFeature {
         }
 
         // 取消定时任务
-        boolean AlarmManager_cancel = methods.contains("Landroid/app/AlarmManager;->cancel");
+//        boolean AlarmManager_cancel = methods.contains("Landroid/app/AlarmManager;->cancel");
+        boolean AlarmManager_cancel = map_mali_API.containsKey("Landroid/app/AlarmManager;") && map_mali_API.containsKey("cancel");
         if (AlarmManager_cancel){
             potential_misBhve.add("Cancel Alarm");
         }
 
         // 使用多线程服务
-        boolean Thread_init = methods.contains("Ljava/lang/Thread;-><init>");
-        boolean Thread_start = methods.contains("Ljava/lang/Thread;->start");
+//        boolean Thread_init = methods.contains("Ljava/lang/Thread;-><init>");
+//        boolean Thread_start = methods.contains("Ljava/lang/Thread;->start");
+                boolean Thread_init = map_mali_API.containsKey("Ljava/lang/Thread;");
+        boolean Thread_start = map_mali_API.containsKey("Ljava/lang/Thread;") && map_mali_API.containsKey("start");
         if (Thread_init && Thread_start){
             potential_misBhve.add("Use Thread");
         }
 
         // 使用代理
-        boolean Proxy_getDefaultHost = methods.contains("Landroid/net/Proxy;->getDefaultHost");
-        boolean Proxy_getDefaultPort = methods.contains("Landroid/net/Proxy;->getDefaultPort");
+//        boolean Proxy_getDefaultHost = methods.contains("Landroid/net/Proxy;->getDefaultHost");
+//        boolean Proxy_getDefaultPort = methods.contains("Landroid/net/Proxy;->getDefaultPort");
+
+                boolean Proxy_getDefaultHost = map_mali_API.containsKey("Landroid/net/Proxy;") && map_mali_API.containsKey("getDefaultHost");
+        boolean Proxy_getDefaultPort = map_mali_API.containsKey("Landroid/net/Proxy;") && map_mali_API.containsKey("getDefaultPort");
         if (Proxy_getDefaultHost && Proxy_getDefaultPort){
             potential_misBhve.add("Use Proxy");
         }
@@ -852,8 +1004,11 @@ public class extractFeature {
         }
 
         // 咪咕支付 SDK 使用
-        boolean migu_pay1 = methods.contains("Lcn/cmgame/billing/api/GameInterface;->initializeApp");
-        boolean migu_pay2 = methods.contains("Lcn/cmgame/billing/api/GameInterface;->doBilling");
+//        boolean migu_pay1 = methods.contains("Lcn/cmgame/billing/api/GameInterface;->initializeApp");
+//        boolean migu_pay2 = methods.contains("Lcn/cmgame/billing/api/GameInterface;->doBilling");
+
+                boolean migu_pay1 = map_mali_API.containsKey("Lcn/cmgame/billing/api/GameInterface;") && map_mali_API.containsKey("initializeApp");
+        boolean migu_pay2 = map_mali_API.containsKey("Lcn/cmgame/billing/api/GameInterface;") && map_mali_API.containsKey("doBilling");
         if (migu_pay1 || migu_pay2){
             potential_misBhve.add("MiGu Pay");
         }
@@ -869,28 +1024,38 @@ public class extractFeature {
         }
 
         // 通过包名启动应用指定的 Activity
-        boolean getLaunchIntentForPackage = methods.contains("Landroid/content/pm/PackageManager;->getLaunchIntentForPackage");
-        boolean startActivity = methods.contains("Lcom/android/append/LauncherActivity;->startActivity");
+//        boolean getLaunchIntentForPackage = methods.contains("Landroid/content/pm/PackageManager;->getLaunchIntentForPackage");
+//        boolean startActivity = methods.contains("Lcom/android/append/LauncherActivity;->startActivity");
+
+                boolean getLaunchIntentForPackage = map_mali_API.containsKey("Landroid/content/pm/PackageManager;") && map_mali_API.containsKey("getLaunchIntentForPackage");
+        boolean startActivity = map_mali_API.containsKey("Lcom/android/append/LauncherActivity;") && map_mali_API.containsKey("startActivity");
         if (getLaunchIntentForPackage && startActivity){
             potential_misBhve.add("Start Activity via Package name");
         }
 
         // Java 代码中调用 shell 命令
-        boolean getRuntime = methods.contains("Ljava/lang/Runtime;->getRuntime");
-        boolean exec = methods.contains("Ljava/lang/Runtime;->exec");
+//        boolean getRuntime = methods.contains("Ljava/lang/Runtime;->getRuntime");
+//        boolean exec = methods.contains("Ljava/lang/Runtime;->exec");
+
+                boolean getRuntime = map_mali_API.containsKey("Ljava/lang/Runtime;") && map_mali_API.containsKey("getRuntime");
+        boolean exec = map_mali_API.containsKey("Ljava/lang/Runtime;") && map_mali_API.containsKey("exec");
         if (getRuntime && exec){
             potential_misBhve.add("Java Exec Shell cmds");
         }
 
         // 执行 SQL 命令
-        boolean execSQL = methods.contains("Landroid/database/sqlite/SQLiteDatabase;->execSQL");
+//        boolean execSQL = methods.contains("Landroid/database/sqlite/SQLiteDatabase;->execSQL");
+        boolean execSQL = map_mali_API.containsKey("Landroid/database/sqlite/SQLiteDatabase;") && map_mali_API.containsKey("execSQL");
         if (execSQL){
             potential_misBhve.add("Exec SQL cmds");
         }
 
         // 杀死进程操作
-        boolean killProcess = methods.contains("Landroid/os/Process;->killProcess");
-        boolean killBackgroundProcesses = methods.contains("Landroid/app/ActivityManager;->killBackgroundProcesses");
+//        boolean killProcess = methods.contains("Landroid/os/Process;->killProcess");
+//        boolean killBackgroundProcesses = methods.contains("Landroid/app/ActivityManager;->killBackgroundProcesses");
+
+                boolean killProcess = map_mali_API.containsKey("Landroid/os/Process;") && map_mali_API.containsKey("killProcess");
+        boolean killBackgroundProcesses = map_mali_API.containsKey("Landroid/app/ActivityManager;") && map_mali_API.containsKey("killBackgroundProcesses");
         if (killBackgroundProcesses || killProcess){
             potential_misBhve.add("Kill Process");
         }
@@ -1232,7 +1397,8 @@ public class extractFeature {
 
 
     public long getFileSize(){
-        long tmp=this.f.getTotalSpace()/(1024 * 1024*100000);
+        long tmp=this.f.getTotalSpace()/(1024 * 1024);
+        tmp=tmp/(100000*5);
         return tmp;// python 版：round(os.path.getsize(self.path) / (1024 * 1024), round_num)
     }
 
@@ -1354,7 +1520,7 @@ public class extractFeature {
         /***匹配 APK 文件中出现的 可疑关包名
          备注：包含匹配, 即包名中存在与该可疑包名即可. 为避免可疑包名与其他特征冲突, 每个可疑关键字后面添加后缀 _pkg_name
          :return: 返回出现的可疑包名 的 list*/
-        ArrayList<String> package_names =ApkUtil.getClasses(dexFile);
+        ArrayList<String> package_names =ApkUtil.getClassesA(dexFile);
         String pkg=null;
         for (String s:suspicious_pkg_names){
             if(package_names.contains(s)){
