@@ -1,25 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".activity.packActivity">
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:context="com.buptnsrc.krrecover.activity.InstallActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
     <Button
+        android:id="@+id/decryptButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/decypte"
-        android:id="@+id/decryptButton"
-        />
+        android:text="@string/decypte" />
+
+    <Button
+        android:id="@+id/skipBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="启动子APK" />
+
+    <Button
+        android:id="@+id/btnBackServer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="手动启动BackServer" />
+
+    <Button
+        android:id="@+id/btn_check"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="验证" />
 
 
-</RelativeLayout>
+</LinearLayout>
